@@ -1,0 +1,21 @@
+{
+  "displayName": "DISPLAY_NAME",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tactilegames/PACKAGE_NAME.git"
+  },
+  "description": "TODO",
+  "name": "com.tactilegames.PACKAGE_NAME",
+  "author": {
+    "name": "Tactile Games",
+    "url": "https://github.com/tactilegames"
+  },
+  "homepage": "https://github.com/tactilegames/PACKAGE_NAME",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@tactilegames"
+  },
+  "testables": ["com.tactilegames.PACKAGE_NAME.tests","com.tactilegames.PACKAGE_NAME.editor.tests"],
+  "dependencies": {},
+  "unity": "2019.4",
+  "version": "1.0.0"
+}

@@ -1,0 +1,42 @@
+version: 2.1
+orbs:
+  devops-tactile-package-orb: tactilegames/devops-tactile-package-orb@volatile
+
+all-cheats: &all-cheats [
+  'TACTILE_CHEATS',
+  'TACTILE_NO_CHEATS',
+]
+
+all-unity-versions: &all-unity-versions [
+  2020,2021,
+]
+
+workflows:
+  version: 2.1
+  verify-development-commit:
+    jobs:
+      - devops-tactile-package-orb/commit-validation-ios:
+          platform: "ios"
+          context:
+            - CLIENT_PACKAGES
+          matrix:
+            parameters:
+              cheats: *all-cheats
+              unity-version: *all-unity-versions
+      - devops-tactile-package-orb/commit-validation-android:
+          platform: "android"
+          context:
+            - CLIENT_PACKAGES
+          matrix:
+            parameters:
+              cheats: *all-cheats
+              unity-version: *all-unity-versions
+      - devops-tactile-package-orb/publish-package:
+          context:
+            - CLIENT_PACKAGES
+          requires:
+            - devops-tactile-package-orb/commit-validation-ios
+            - devops-tactile-package-orb/commit-validation-android
+          filters:
+            branches:
+              only: ["master"]
